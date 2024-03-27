@@ -2,7 +2,7 @@
 , lib
 , buildEnv
 , stdenv
-, defaultLibraries ? [
+, ldFloxlibEnv ? [
     # List here any libraries that you would prefer to see
     # loaded purely from Nix.
     stdenv.cc.cc.lib	# for libstdc++.so.6
@@ -13,7 +13,7 @@ let
   pname = "ld-floxlib";
   ld_floxlib_libs = buildEnv {
     name = "${pname}-libs";
-    paths = defaultLibraries;
+    paths = ldFloxlibEnv;
   };
 
 in
