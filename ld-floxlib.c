@@ -13,10 +13,6 @@
 #include <link.h>
 #include <sys/stat.h>
 
-static int audit_impure = -1;
-static int debug_ld_floxlib = -1;
-static char name_buf[PATH_MAX];
-
 /* Copied from link.h */
 enum
   {
@@ -84,6 +80,11 @@ la_version(unsigned int version)
 char *
 la_objsearch(const char *name, uintptr_t *cookie, unsigned int flag)
 {
+
+    int audit_impure = -1;
+    int debug_ld_floxlib = -1;
+    char name_buf[PATH_MAX];
+
     struct stat stat_buf;
 
     if (audit_impure < 0)
