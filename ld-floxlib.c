@@ -3,13 +3,9 @@
  *              load RHEL system libraries as last resort
  */
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif  /* _GNU_SOURCE */
 
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
+#include <stdint.h>
 #include <sys/param.h>
 #include <limits.h>
 #include <stdio.h>
@@ -20,6 +16,17 @@
 static int audit_impure = -1;
 static int debug_ld_floxlib = -1;
 static char name_buf[PATH_MAX];
+
+/* Copied from link.h */
+enum
+  {
+    LA_SER_ORIG = 0x01,		/* Original name.  */
+    LA_SER_LIBPATH = 0x02,	/* Directory from LD_LIBRARY_PATH.  */
+    LA_SER_RUNPATH = 0x04,	/* Directory from RPATH/RUNPATH.  */
+    LA_SER_CONFIG = 0x08,	/* Found through ldconfig.  */
+    LA_SER_DEFAULT = 0x40,	/* Default directory.  */
+    LA_SER_SECURE = 0x80	/* Unused.  */
+  };
 
 unsigned int
 la_version(unsigned int version)
