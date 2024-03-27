@@ -1,7 +1,7 @@
 VERSION = 0.2
 
 ld-floxlib.so: ld-floxlib.c
-	$(CC) $(CFLAGS) -shared -fPIC $< -o $@ -ldl
+	$(CC) $(CFLAGS) -shared -fPIC $< -o $@
 
 install: ld-floxlib.so
 	mkdir -p $(PREFIX)/lib
